@@ -14,10 +14,9 @@ public class ConnectFourServer extends WebSocketServer {
     public static LinkedList<User> connectedUsers = new LinkedList<>();
 
     public static void main(String[] args){
-        String host = "localhost";
-        int port = 81;
+        int port = 666;
 
-        WebSocketServer server = new ConnectFourServer(new InetSocketAddress(host, port));
+        WebSocketServer server = new ConnectFourServer(new InetSocketAddress(port));
         server.run();
     }
 
