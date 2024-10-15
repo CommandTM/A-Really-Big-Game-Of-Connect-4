@@ -29,10 +29,24 @@ body {
     flex-direction: column;
 }
 
+#userList {
+    position: relative;
+    text-align: right;
+    overflow: scroll;
+    width: 10%;
+    left: 90%;
+    height: 100%;
+    background-color: white;
+}
+
 .connectField {
     width: 90%;
 }
 
 .centered {
     text-align: center;
+}
+
+.noMargin {
+    margin: auto;
 }

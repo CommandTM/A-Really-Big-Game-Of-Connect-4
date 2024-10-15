@@ -33,6 +33,17 @@ public class ConnectFourServer extends WebSocketServer {
     @Override
     public void onClose(WebSocket webSocket, int i, String s, boolean b) {
         System.out.println("Closed " + webSocket.getRemoteSocketAddress() + " with exit code " + i + " extra info: " + s);
+        int userIndex = -1;
+        for (int k = 0; k < connectedUsers.size(); k++){
+            if (connectedUsers.get(k).address == webSocket.getRemoteSocketAddress()){
+                userIndex = k;
+                break;
+            }
+        }
+        if (userIndex != -1){
+            connectedUsers.remove(userIndex);
+        }
+        broadcast(gson.toJson(new Comm("update", connectedUsers)));
     }
 
     @Override
