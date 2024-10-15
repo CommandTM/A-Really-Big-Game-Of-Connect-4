@@ -1,5 +1,12 @@
 body {
     background-color: darkturquoise;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    height: 99%;
+    width: 99%;
 }
 
 #messageBox {
@@ -9,4 +16,23 @@ body {
     top: 5%;
     width: 90%;
     height: 90%;
+}
+
+#connectBox {
+    position: absolute;
+    background-color: lightskyblue;
+    width: max-content;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.connectField {
+    width: 90%;
+}
+
+.centered {
+    text-align: center;
 }

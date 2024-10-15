@@ -7,18 +7,12 @@
 </head>
 <script src="client.js"></script>
 <body>
-    <div>
-        <label for="ip">IP:</label><input type="text" id="ip">
+    <div class="centered" id="connectBox">
+        <label for="ip">IP:</label><input type="text" id="ip" class="connectField">
+        <label for="user">Username:</label><input type="text" id="user" class="connectField">
+        <button onclick="connect()">Connect</button>
     </div>
-    <div>
-        <label for="user">Username:</label><input type="text" id="user">
-    </div>
-    <button onclick="connect()">Connect</button>
-    <div id="messageSend" hidden="hidden">
-        <input type="text" id="text">
-        <button onclick="sendMessage()">Send</button>
-    </div>
-<div id="messageBox">
+<div id="messageBox" hidden="hidden">
 
 </div>
 </body>

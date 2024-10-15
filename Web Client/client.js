@@ -2,11 +2,12 @@ let webSocket = null;
 let username;
 
 function connect() {
-    webSocket = new WebSocket('ws://localhost:81')
+    webSocket = new WebSocket(document.getElementById("ip").value)
+    username = document.getElementById("user").value
 
     webSocket.onopen = function() {
-        document.getElementById("messageSend").hidden = false
-        webSocket.send(JSON.stringify({type: "login", username: document.getElementById("user").value}))
+        document.getElementById("messageBox").hidden = false
+        webSocket.send(JSON.stringify({type: "login", username: username}))
     }
 
     webSocket.onmessage = event => {
