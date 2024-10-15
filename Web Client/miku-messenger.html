@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Miku Messenger</title>
+    <link rel="stylesheet" href="miku-messenger.css">
+</head>
+<script src="client.js"></script>
+<body>
+    <div>
+        <label for="ip">IP:</label><input type="text" id="ip">
+    </div>
+    <div>
+        <label for="user">Username:</label><input type="text" id="user">
+    </div>
+    <button onclick="connect()">Connect</button>
+    <div id="messageSend" hidden="hidden">
+        <input type="text" id="text">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+<div id="messageBox">
+
+</div>
+</body>
+</html>
