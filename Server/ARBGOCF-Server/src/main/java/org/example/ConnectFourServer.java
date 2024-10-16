@@ -12,6 +12,7 @@ import java.util.List;
 public class ConnectFourServer extends WebSocketServer {
     public static Gson gson = new Gson();
     public static LinkedList<User> connectedUsers = new LinkedList<>();
+    public static InputLayer input;
 
     public static void main(String[] args){
         int port = 81;
@@ -56,6 +57,22 @@ public class ConnectFourServer extends WebSocketServer {
             }
             case "message" -> {
                 broadcast(s);
+            }
+            case "input"-> {
+                if (input != null){
+                    if (comm.player != input.getTurn()) return;
+                    if (input.checkMove(comm.column)){
+                        input.play(comm.column);
+                        broadcast(gson.toJson(new Comm("erorr", "Not Implemented!")));
+                    } else {
+                        webSocket.send(gson.toJson(new Comm("error", "Column Is Full!")));
+                    }
+                } else {
+                    webSocket.send(gson.toJson(new Comm("error", "Game Not Started!")));
+                }
+            }
+            case "newgame" -> {
+                input = new InputLayer(comm.width, comm.height, comm.players.toCharArray());
             }
         }
     }

@@ -2,15 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Miku Messenger</title>
+    <title>ARBGOCF-Client</title>
     <link rel="stylesheet" href="miku-messenger.css">
 </head>
 <script src="client.js"></script>
 <body>
+<div class="body">
     <div class="centered" id="connectBox">
-        <label for="ip">IP:</label><input type="text" id="ip" class="connectField">
-        <label for="user">Username:</label><input type="text" id="user" class="connectField">
-        <button onclick="connect()">Connect</button>
+        <div id="connectHeader">
+            <p id="connectHeaderText"><b>Welcome to ARBGOCF</b></p>
+        </div>
+        <img src="key.png" style="position: absolute; left: 23px; top: 33px">
+        <p style="position: absolute; font-size: 10pt; left: 93px; top: 34px; margin: 0">Type a username and IP to log on to ARBGOCF.</p>
+        <label for="ip" id="ipLabel"><u>I</u>P:</label><input type="text" id="ip" class="connectField">
+        <label for="user" id="userLabel"><u>U</u>ser name:</label><input type="text" id="user" class="connectField">
+        <button onclick="connect()" style="position: absolute; right: 12px; top: 33px; width: 74px; height: 23px">OK</button>
     </div>
 <div id="messageBox" hidden="hidden">
     <div id="userList">
@@ -25,6 +31,7 @@
     <div  id="messages">
 
     </div>
+</div>
 </div>
 </body>
 </html>
