@@ -30,13 +30,46 @@ body {
 }
 
 #userList {
-    position: relative;
+    position: absolute;
     text-align: right;
     overflow: scroll;
     width: 10%;
     left: 90%;
     height: 100%;
     background-color: white;
+}
+
+#message {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90%;
+    height: 100%;
+}
+
+#messageField {
+    position: absolute;
+    bottom: 0;
+    height: 3%;
+    width: 80%;
+}
+
+#messageSend {
+    position: absolute;
+    bottom: 1%;
+    height: 3%;
+    width: 10%;
+    right: 5%;
+}
+
+#messages {
+    position: absolute;
+    overflow-y: scroll;
+    text-wrap: wrap;
+    top: 0;
+    left: 0;
+    width: 90%;
+    height: 96%;
 }
 
 .connectField {

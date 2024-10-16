@@ -14,7 +14,7 @@ public class ConnectFourServer extends WebSocketServer {
     public static LinkedList<User> connectedUsers = new LinkedList<>();
 
     public static void main(String[] args){
-        int port = 666;
+        int port = 81;
 
         WebSocketServer server = new ConnectFourServer(new InetSocketAddress(port));
         server.run();
@@ -53,6 +53,9 @@ public class ConnectFourServer extends WebSocketServer {
             case "login" -> {
                 connectedUsers.add(new User(comm.username, webSocket.getRemoteSocketAddress()));
                 broadcast(gson.toJson(new Comm("update", connectedUsers)));
+            }
+            case "message" -> {
+                broadcast(s);
             }
         }
     }

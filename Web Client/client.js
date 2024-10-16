@@ -2,8 +2,11 @@ let webSocket = null;
 let username;
 
 function connect() {
-    webSocket = new WebSocket(document.getElementById("ip").value)
     username = document.getElementById("user").value
+    if (username.length > 30){
+        return;
+    }
+    webSocket = new WebSocket(document.getElementById("ip").value)
 
     webSocket.onopen = function() {
         document.getElementById("messageBox").hidden = false
@@ -15,6 +18,9 @@ function connect() {
         var message = JSON.parse(event.data)
         if (message.type === "update") {
             refresh(message)
+        }
+        if (message.type === "message"){
+            receiveMessage(message)
         }
     }
 }
@@ -30,6 +36,13 @@ function refresh(message){
     }
 }
 
+function receiveMessage(message){
+    document.getElementById("messages").appendChild(document.createElement("p"))
+    document.getElementById("messages").children[document.getElementById("messages").children.length-1].innerHTML=message.username + ": " + message.message
+    document.getElementById("messages").children[document.getElementById("messages").children.length-1].className="noMargin"
+}
+
 function sendMessage() {
-    webSocket.send(document.getElementById('text').value)
+    webSocket.send(JSON.stringify({type: "message", username: username, message: document.getElementById('messageField').value}))
+    document.getElementById("messageField").value = "";
 }
