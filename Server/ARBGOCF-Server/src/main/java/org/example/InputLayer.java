@@ -16,6 +16,10 @@ public class InputLayer {
         return players[turn];
     }
 
+    public char getPreviousTurn(){
+
+    }
+
     public void nextTurn(){
         turn += 1;
         if (turn == players.length) turn = 0;

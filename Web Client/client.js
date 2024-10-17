@@ -51,6 +51,7 @@ function renderBoard(message){
     for (let i = 0; i < message.board.length; i++) {
         board.innerHTML += (message.board[i] + "<br/>")
     }
+    document.getElementById("turnIndicator").innerHTML = "Current Turn: " + message.players.charAt(message.turn)
     width = message.width
     height = message.height
 }

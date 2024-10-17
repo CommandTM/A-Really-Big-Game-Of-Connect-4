@@ -48,15 +48,6 @@ p {
     font-size: 10pt;
 }
 
-#messageBox {
-    position: absolute;
-    background-color: #00807F;
-    left: 5%;
-    top: 5%;
-    width: 90%;
-    height: 90%;
-}
-
 #connectBox {
     position: absolute;
     background-color: #c0c0c0;
@@ -135,6 +126,10 @@ p {
     left: 0;
     width: 90%;
     height: 96%;
+}
+
+#board {
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .connectField {

@@ -18,19 +18,34 @@
         <label for="user" id="userLabel"><u>U</u>ser name:</label><input type="text" id="user" class="connectField">
         <button onclick="connect()" style="position: absolute; right: 12px; top: 33px; width: 74px; height: 23px">OK</button>
     </div>
-<div id="messageBox" hidden="hidden">
+<div id="messageBox" hidden="hidden" style="
+    position: absolute;
+    background-color: #c0c0c0;
+    left: 5%;
+    top: 5%;
+    width: 90%;
+    height: 90%;
+">
     <div id="userList">
         <p class="noMargin">CommandTM</p>
         <p class="noMargin">Hatsune Miku</p>
         <p class="noMargin">RKSona</p>
     </div>
-    <input type="text" id="height">
-    <input type="text" id="width">
-    <input type="text" id="players">
-    <button onclick="newGame()">New Game!</button>
-    <p id="board"></p>
+    <div id="newGameInputs" style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+">
+        <input type="text" id="height">
+        <input type="text" id="width">
+        <input type="text" id="players">
+        <button onclick="newGame()">New Game!</button>
+    </div>
+    <pre><p id="board"></p></pre>
     <input type="text" id="move">
     <button onclick="playMove()">Play Column</button>
+    <p id="turnIndicator"></p>
 </div>
 </div>
 </body>
