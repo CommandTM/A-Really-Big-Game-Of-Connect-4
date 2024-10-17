@@ -19,6 +19,7 @@ public class InputLayer {
     public void nextTurn(){
         turn += 1;
         if (turn == players.length) turn = 0;
+        board.printBoard();
     }
 
     public boolean checkMove(int column){

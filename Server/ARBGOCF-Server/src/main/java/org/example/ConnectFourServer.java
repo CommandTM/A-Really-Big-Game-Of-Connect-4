@@ -53,6 +53,15 @@ public class ConnectFourServer extends WebSocketServer {
         switch (comm.type) {
             case "login" -> {
                 connectedUsers.add(new User(comm.username, webSocket.getRemoteSocketAddress()));
+                if (input != null){
+                    String players = "";
+                    for (char player : input.players){
+                        players += player;
+                    }
+                    broadcast(gson.toJson(new Comm("login", true, input.board.width, input.board.height, input.board.board, players, input.turn)));
+                } else {
+                    webSocket.send(gson.toJson(new Comm("login", false)));
+                }
                 broadcast(gson.toJson(new Comm("update", connectedUsers)));
             }
             case "message" -> {
@@ -60,10 +69,20 @@ public class ConnectFourServer extends WebSocketServer {
             }
             case "input"-> {
                 if (input != null){
-                    if (comm.player != input.getTurn()) return;
+                    comm.column -= 1;
                     if (input.checkMove(comm.column)){
-                        input.play(comm.column);
-                        broadcast(gson.toJson(new Comm("erorr", "Not Implemented!")));
+                        broadcast(gson.toJson(new Comm("message", "Server", (comm.username + " Has Played " + input.getTurn() + " On Column " + comm.column))));
+                        if (!input.play(comm.column)){
+                            String players = "";
+                            for (char player : input.players){
+                                players += player;
+                            }
+                            broadcast(gson.toJson(new Comm("login", true, input.board.width, input.board.height, input.board.board, players, input.turn)));
+                        } else {
+                            broadcast(gson.toJson(new Comm("message", "Server", (input.getTurn() + " Has Won!"))));
+                            input = null;
+                            broadcast(gson.toJson(new Comm("login", false)));
+                        }
                     } else {
                         webSocket.send(gson.toJson(new Comm("error", "Column Is Full!")));
                     }
@@ -73,6 +92,11 @@ public class ConnectFourServer extends WebSocketServer {
             }
             case "newgame" -> {
                 input = new InputLayer(comm.width, comm.height, comm.players.toCharArray());
+                String players = "";
+                for (char player : input.players){
+                    players += player;
+                }
+                broadcast(gson.toJson(new Comm("login", true, input.board.width, input.board.height, input.board.board, players, input.turn)));
             }
         }
     }

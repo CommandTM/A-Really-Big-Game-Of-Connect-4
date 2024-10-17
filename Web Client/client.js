@@ -1,5 +1,7 @@
 let webSocket = null;
 let username;
+let width;
+let height;
 
 function connect() {
     username = document.getElementById("user").value
@@ -22,6 +24,9 @@ function connect() {
         if (message.type === "message"){
             receiveMessage(message)
         }
+        if (message.type === "login" && message.gameExists === true){
+            renderBoard(message)
+        }
     }
 }
 
@@ -36,6 +41,28 @@ function refresh(message){
     }
 }
 
+function newGame(){
+    webSocket.send(JSON.stringify({type: "newgame", username: username, width: document.getElementById("width").value, height: document.getElementById("height").value, players: document.getElementById("players").value}))
+}
+
+function renderBoard(message){
+    let board = document.getElementById("board")
+    board.innerHTML = ""
+    for (let i = 0; i < message.board.length; i++) {
+        board.innerHTML += (message.board[i] + "<br/>")
+    }
+    width = message.width
+    height = message.height
+}
+
+function playMove(){
+    let column = document.getElementById("move").value
+    if (column > 0 && column < width+1){
+        webSocket.send(JSON.stringify({type: "input", column: column, username: username}))
+    }
+}
+
+/*
 function receiveMessage(message){
     document.getElementById("messages").appendChild(document.createElement("p"))
     document.getElementById("messages").children[document.getElementById("messages").children.length-1].innerHTML=message.username + ": " + message.message
@@ -46,3 +73,4 @@ function sendMessage() {
     webSocket.send(JSON.stringify({type: "message", username: username, message: document.getElementById('messageField').value}))
     document.getElementById("messageField").value = "";
 }
+*/
