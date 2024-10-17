@@ -22,7 +22,10 @@ function connect() {
             refresh(message)
         }
         if (message.type === "message"){
-            receiveMessage(message)
+            document.getElementById("messageDisplay").innerHTML = message.message
+        }
+        if (message.type === "error"){
+            document.getElementById("messageDisplay").innerHTML = message.message
         }
         if (message.type === "login" && message.gameExists === true){
             renderBoard(message)

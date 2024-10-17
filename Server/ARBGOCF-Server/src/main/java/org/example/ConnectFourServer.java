@@ -71,7 +71,7 @@ public class ConnectFourServer extends WebSocketServer {
                 if (input != null){
                     comm.column -= 1;
                     if (input.checkMove(comm.column)){
-                        broadcast(gson.toJson(new Comm("message", "Server", (comm.username + " Has Played " + input.getTurn() + " On Column " + comm.column))));
+                        broadcast(gson.toJson(new Comm("message", "Server", (comm.username + " Has Played " + input.getTurn() + " On Column " + (comm.column+1)))));
                         if (!input.play(comm.column)){
                             String players = "";
                             for (char player : input.players){
@@ -79,7 +79,7 @@ public class ConnectFourServer extends WebSocketServer {
                             }
                             broadcast(gson.toJson(new Comm("login", true, input.board.width, input.board.height, input.board.board, players, input.turn)));
                         } else {
-                            broadcast(gson.toJson(new Comm("message", "Server", (input.getTurn() + " Has Won!"))));
+                            broadcast(gson.toJson(new Comm("message", "Server", (input.getPreviousTurn() + " Has Won!"))));
                             input = null;
                             broadcast(gson.toJson(new Comm("login", false)));
                         }
