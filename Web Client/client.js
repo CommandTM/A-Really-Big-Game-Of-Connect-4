@@ -12,6 +12,7 @@ function connect() {
 
     webSocket.onopen = function() {
         document.getElementById("messageBox").hidden = false
+        //document.getElementById("messageBox").style.display = "flex";
         webSocket.send(JSON.stringify({type: "login", username: username}))
     }
 
@@ -27,19 +28,30 @@ function connect() {
         if (message.type === "error"){
             document.getElementById("messageDisplay").innerHTML = message.message
         }
-        if (message.type === "login" && message.gameExists === true){
-            renderBoard(message)
+        if (message.type === "login"){
+            document.getElementById("boardsStuff").hidden = !message.gameExists
+            document.getElementById("newGameInputs").hidden = message.gameExists
+            if (message.gameExists){
+                document.getElementById("newGameInputs").style.display = "none";
+                renderBoard(message)
+            } else {
+                document.getElementById("newGameInputs").style.display = "flex";
+            }
         }
     }
+
+    document.getElementById("move").addEventListener("keypress", function(e){
+        if (e.key === "Enter"){
+            e.preventDefault()
+            playMove()
+        }
+    })
 }
 
 function refresh(message){
-    document.getElementById("userList").innerHTML = ""
+    document.getElementById("userList").innerHTML = "|   "
     for (let i = 0; i < message.users.length; i++) {
-        let name = document.createElement("p").innerHTML=message.users[i].name
-        document.getElementById("userList").appendChild(document.createElement("p"))
-        document.getElementById("userList").children[i].innerHTML=name
-        document.getElementById("userList").children[i].className="noMargin"
+        document.getElementById("userList").innerHTML += (message.users[i].name + "   |   ")
         //document.getElementById("userList").append(<p class='noMargin'>"+message.users[i].name+"</p>)
     }
 }
@@ -64,6 +76,7 @@ function playMove(){
     if (column > 0 && column < width+1){
         webSocket.send(JSON.stringify({type: "input", column: column, username: username}))
     }
+    document.getElementById("move").value = ""
 }
 
 /*

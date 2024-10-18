@@ -5,6 +5,7 @@
 
 body {
     margin: 0;
+    background: #00807F;
 }
 
 label {
@@ -87,12 +88,7 @@ p {
 
 #userList {
     position: absolute;
-    text-align: right;
-    overflow: scroll;
-    width: 10%;
-    left: 90%;
-    height: 100%;
-    background-color: white;
+    overflow: auto;
 }
 
 #message {
